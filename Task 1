@@ -1,1 +1,15 @@
+#!/bin/bash
 
+cnt_lines=$(wc -l input.txt | awk '{print $1}')
+
+cnt_words=$(wc -w input.txt | awk '{print $1}')
+
+cnt_letters=$(grep -o '[A-Za-z]' input.txt | wc -l)
+
+echo "Input file contains:
+
+$cnt_letters letters
+
+$cnt_words words
+
+$cnt_lines lines" > output.txt
