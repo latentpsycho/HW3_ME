@@ -1,0 +1,43 @@
+#!/bin/bash
+
+mod=$((10**9+7))
+
+sum=0
+
+x=""
+
+nums=()
+
+while IFS= read -r num; do
+
+  nums+=("$num")
+
+done < input.txt
+
+​
+if (( ${#nums[@]} >= 2 )); then
+
+  x="${nums[0]}"
+
+  sum=$((nums[1] % mod))
+
+  for (( i=2; i < ${#nums[@]}; i++ )); do
+
+    if (( i == 2 )); then
+
+      prev=$((x % mod))
+
+    else
+
+      prev=$((prev * x % mod))
+
+    fi
+
+    sum=$(( (sum + nums[i] * prev) % mod ))
+
+  done
+
+fi
+
+​
+echo $sum > output.txt
